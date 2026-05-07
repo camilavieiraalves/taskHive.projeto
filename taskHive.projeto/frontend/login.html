@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login – Task Hive</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>TASK HIVE</h1>
+    <h2>Login</h2>
+
+    <div class="input-area">
+      <input id="emailLogin" type="text" placeholder="Digite seu e-mail">
+      <input id="senhaLogin" type="password" placeholder="Digite sua senha">
+      <button id="loginBtn">Entrar</button>
+      <p id="msg"></p>
+
+      <p style="margin-top: 10px; font-size:14px;">
+        Não tem conta?
+        <a href="cadastro.html">Cadastrar</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const loginBtn = document.getElementById('loginBtn');
+    const msg = document.getElementById('msg');
+
+    loginBtn.addEventListener('click', () => {
+      const email = document.getElementById('emailLogin').value.trim();
+      const senha = document.getElementById('senhaLogin').value.trim();
+
+      if (!email || !senha) {
+        msg.textContent = "Preencha todos os campos!";
+        msg.className = "error";
+        return;
+      }
+
+      const userJSON = localStorage.getItem('taskhive_user');
+      if (!userJSON) {
+        msg.textContent = "Nenhum usuário cadastrado!";
+        msg.className = "error";
+        return;
+      }
+
+      const user = JSON.parse(userJSON);
+
+      if (email === user.email && senha === user.senha) {
+        msg.textContent = "Login realizado!";
+        msg.className = "success";
+        localStorage.setItem('taskhive_logged', 'true');
+        // opcional: guardar qual usuário
+        localStorage.setItem('taskhive_logged_user', email);
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 800);
+      } else {
+        msg.textContent = "E-mail ou senha incorretos!";
+        msg.className = "error";
+      }
+    });
+
+    // se já estiver logado, redireciona
+    if (localStorage.getItem('taskhive_logged') === 'true') {
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>

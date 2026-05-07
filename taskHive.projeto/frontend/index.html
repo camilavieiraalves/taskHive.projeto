@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task Hive</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>TASK HIVE</h1>
+    <h2>Seu organizador de projetos</h2>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:8px;">
+      <h3 style="margin:0; font-size:13px;">Adicione seu novo projeto:</h3>
+      <button id="logoutBtn" style="padding:6px 8px; font-size:12px;">Sair</button>
+    </div>
+
+    <div class="input-area">
+      <input id="itemInput" type="text" placeholder="Digite um item (mínimo 5 caracteres)">
+      
+      <div class="file-area">
+        <label for="imgInput">Escolher Imagem (PNG):</label>
+        <input id="imgInput" type="file" accept="image/png">
+      </div>
+
+      <button id="addBtn">Adicionar</button>
+      <p id="msg"></p>
+    </div>
+
+    <ul id="lista"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

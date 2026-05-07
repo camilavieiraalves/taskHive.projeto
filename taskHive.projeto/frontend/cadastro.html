@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastro – Task Hive</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>TASK HIVE</h1>
+    <h2>Cadastro</h2>
+
+    <div class="input-area">
+      <input id="nomeCadastro" type="text" placeholder="Nome completo">
+      <input id="emailCadastro" type="text" placeholder="E-mail">
+      <input id="senhaCadastro" type="password" placeholder="Senha (mín. 6 caracteres)">
+      <button id="cadBtn">Cadastrar</button>
+      <p id="msg"></p>
+
+      <p style="margin-top: 10px; font-size:14px;">
+        Já tem conta?
+        <a href="login.html">Entrar</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('cadBtn').addEventListener('click', () => {
+      const nome = document.getElementById('nomeCadastro').value.trim();
+      const email = document.getElementById('emailCadastro').value.trim();
+      const senha = document.getElementById('senhaCadastro').value.trim();
+      const msg = document.getElementById('msg');
+
+      if (!nome || !email || !senha) {
+        msg.textContent = "Preencha todos os campos!";
+        msg.className = "error";
+        return;
+      }
+
+      if (senha.length < 6) {
+        msg.textContent = "A senha deve ter no mínimo 6 caracteres!";
+        msg.className = "error";
+        return;
+      }
+
+      // Salva usuário (simples - somente 1 usuário)
+      const user = { nome, email, senha };
+      localStorage.setItem('taskhive_user', JSON.stringify(user));
+
+      msg.textContent = "Cadastro concluído!";
+      msg.className = "success";
+
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 800);
+    });
+
+    // se já estiver logado, redireciona
+    if (localStorage.getItem('taskhive_logged') === 'true') {
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
